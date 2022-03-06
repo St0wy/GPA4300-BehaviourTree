@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.Scripting;
 
-namespace BehaviourTree
+public class DisableBreakBehaviour : MonoBehaviour, IBreakableBehaviour
 {
-    public class DisableBreakBehaviour : MonoBehaviour, IBreakableBehaviour
+    [field: SerializeField]
+    public Transform BreakPoint { get; private set;  }
+
+    public float DistanceToBreakPoint => Vector3.Distance(BreakPoint.position, transform.position);
+        
+    public void Break()
     {
-        public void Break()
-        {
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
     }
 }

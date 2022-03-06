@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace BehaviourTree.BehaviourTree
+namespace BehaviourTree
 {
-    public abstract class Tree : MonoBehaviour
+    public abstract class BTree : MonoBehaviour
     {
         private Node root;
 

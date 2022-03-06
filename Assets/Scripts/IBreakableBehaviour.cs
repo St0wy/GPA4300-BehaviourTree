@@ -1,9 +1,4 @@
-﻿using UnityEngine;
-
-namespace BehaviourTree
+﻿public interface IBreakableBehaviour
 {
-    public interface IBreakableBehaviour
-    {
-        public void Break();
-    }
+    public void Break();
 }

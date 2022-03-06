@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BehaviourTree.BehaviourTree
+namespace BehaviourTree
 {
     public class Selector : ListNode
     {
@@ -9,7 +9,7 @@ namespace BehaviourTree.BehaviourTree
 
         public override NodeState Evaluate()
         {
-            foreach (Node child in children)
+            foreach (Node child in Children)
             {
                 switch (child.Evaluate())
                 {

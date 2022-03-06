@@ -1,13 +1,10 @@
-﻿using System;
-using System.Diagnostics;
-
-namespace BehaviourTree.BehaviourTree
+﻿namespace BehaviourTree
 {
     public class Leaf : Node
     {
         public delegate NodeState LeafDelegate();
 
-        private LeafDelegate action;
+        private readonly LeafDelegate action;
 
         public Leaf(LeafDelegate action)
         {

@@ -1,4 +1,4 @@
-﻿namespace BehaviourTree.BehaviourTree
+﻿namespace BehaviourTree
 {
     public enum NodeState
     {

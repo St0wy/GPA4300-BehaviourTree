@@ -1,36 +1,48 @@
 ﻿using System.Collections.Generic;
 
-namespace BehaviourTree.BehaviourTree
+namespace BehaviourTree
 {
     public class Sequence : ListNode
     {
+        private int currentStep;
+        
         public Sequence() { }
         public Sequence(List<Node> children) : base(children) { }
 
         public override NodeState Evaluate()
         {
-            var isAnyChildRunning = false;
-
-            foreach (Node child in children)
+            if (Children.Count <= 0)
             {
-                switch (child.Evaluate())
-                {
-                    case NodeState.Failure:
-                        State = NodeState.Failure;
-                        return State;
-                    case NodeState.Success:
-                        continue;
-                    case NodeState.Running:
-                        isAnyChildRunning = true;
-                        continue;
-                    default:
-                        State = NodeState.Success;
-                        return State;
-                }
+                State = NodeState.Success;
+                return State;
             }
 
-            State = isAnyChildRunning ? NodeState.Running : NodeState.Success;
-            return State;
+            Node currentNode = Children[currentStep];
+            switch (currentNode.Evaluate())
+            {
+                case NodeState.Success:
+                    currentStep++;
+                    if (currentStep >= Children.Count)
+                    {
+                        currentStep = 0;
+                        State = NodeState.Success;
+                        return State;
+                    }
+                    else
+                    {
+                        State = NodeState.Running;
+                        return State;
+                    }
+                case NodeState.Failure:
+                    State = NodeState.Failure;
+                    return State;
+                case NodeState.Running:
+                    State = NodeState.Running;
+                    return State;
+                default:
+                    State = NodeState.Success;
+                    return State;
+            }
         }
     }
 }
